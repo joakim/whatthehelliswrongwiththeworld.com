@@ -49,6 +49,11 @@
       opacity: 1;
     }
 
+    #reload {
+      bottom: 51px;
+      background-image: url("reload.png");
+    }
+
     #share {
       bottom: 0;
       background-image: url("share.png");
@@ -72,11 +77,13 @@
 <body>
 
   <input disabled id="link">
+  <button id="reload">Reload</button>
   <button id="share">Share</button>
 
   <script>
     // Proudly using the cross-platform JS library diy.js (http://diy.lab.io/).
     var $ = document,
+        $reload = $.getElementById('reload'),
         $share = $.getElementById('share'),
         $link = $.getElementById('link');
 
@@ -124,6 +131,11 @@
         $share.className = '';
         $link.style.display = '';
       }
+    });
+
+    // Reload the page, removing any hash.
+    $reload.addEventListener('click', function() {
+      location.replace('');
     });
   </script>
 

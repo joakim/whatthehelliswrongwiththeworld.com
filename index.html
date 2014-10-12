@@ -54,6 +54,11 @@
       'redY5iq',
       'F4cuMOl',
     ];
+
+    // Either get the gif ID from the hash or pick a random one.
+    var id = location.hash.slice(1) || gifs[Math.floor(Math.random() * gifs.length)];
+
+    $.body.style.backgroundImage = 'url("//i.imgur.com/' + id + '.gif")';
   </script>
   <!-- Look ma, no trackers! -->
 </body>

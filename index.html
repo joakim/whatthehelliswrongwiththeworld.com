@@ -142,11 +142,13 @@
     $.body.style.backgroundImage = 'url("//i.imgur.com/' + id + '.gif")';
     $link.value = 'http://whatthehelliswrongwiththeworld.com/#' + id;
 
-    $share.addEventListener('click', toggleLink);
+    $share.addEventListener('click', function() {
+      if ($share.className !== 'active') toggleLink();
+    });
 
     $link.addEventListener('click', selectLink);
     $link.addEventListener('focus', selectLink);
-    $link.addEventListener('blur', toggleLink);
+    $link.addEventListener('blur', setTimeout.bind(this, toggleLink, 50));
 
     $reload.addEventListener('click', function() {
       // Reloads the page, removing any hash in the URL.

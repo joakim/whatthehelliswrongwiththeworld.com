@@ -80,7 +80,7 @@
 </head>
 <body>
 
-  <input disabled id="link">
+  <input id="link">
   <button id="reload">Reload</button>
   <button id="share">Share</button>
 
@@ -90,6 +90,24 @@
         $reload = $.getElementById('reload'),
         $share = $.getElementById('share'),
         $link = $.getElementById('link');
+
+    // Toggles the share link.
+    function toggleLink() {
+      if (!$link.style.display) {
+        $share.className = 'active';
+        $link.style.display = 'block';
+        $link.focus();
+      }
+      else {
+        $share.className = '';
+        $link.style.display = '';
+      }
+    }
+
+    // Selects the link, even works on iOS!
+    function selectLink() {
+      $link.setSelectionRange(0, $link.value.length);
+    }
 
     // A lot of frustration in this array.
     var gifs = [
@@ -124,21 +142,14 @@
     $.body.style.backgroundImage = 'url("//i.imgur.com/' + id + '.gif")';
     $link.value = 'http://whatthehelliswrongwiththeworld.com/#' + id;
 
-    // Toggle the share link.
-    $share.addEventListener('click', function() {
-      if (!$link.style.display) {
-        $share.className = 'active';
-        $link.style.display = 'block';
-        $link.select();
-      }
-      else {
-        $share.className = '';
-        $link.style.display = '';
-      }
-    });
+    $share.addEventListener('click', toggleLink);
 
-    // Reload the page, removing any hash.
+    $link.addEventListener('click', selectLink);
+    $link.addEventListener('focus', selectLink);
+    $link.addEventListener('blur', toggleLink);
+
     $reload.addEventListener('click', function() {
+      // Reloads the page, removing any hash in the URL.
       location.replace('');
     });
   </script>

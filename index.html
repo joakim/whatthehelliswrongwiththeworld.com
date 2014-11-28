@@ -24,7 +24,7 @@
     body {
       height: 100%;
       width: 100%;
-      background: url("//i.imgur.com/AWKmeTH.gif") #000000 center center fixed no-repeat;
+      background: url("http://i.imgur.com/xmH91zq.gif") #000000 center center fixed no-repeat;
       -webkit-background-size: contain;
       -moz-background-size: contain;
       -ms-background-size: contain;
@@ -94,6 +94,44 @@
         $share = $.getElementById('share'),
         $link = $.getElementById('link');
 
+    // A lot of frustration in this array.
+    var gifs = [
+      'xmH91zq',
+      'uMFuxvj',
+      'yql6OqH',
+      'JGFh3o8',
+      'OXOYRjA',
+      'ISNHV55',
+      'OqhmgJh',
+      'bLTZDxV',
+      'pjDkkc1',
+      '9Zjcx7G',
+      'aGfRwMz',
+      'IzDxzYl',
+      'xBVm2yH',
+      'TCGwJry',
+      'redY5iq',
+      'F4cuMOl',
+      // 'EgIJo37',
+      // 'iTUZotO',
+      // '7e8mGbz',
+      // 'ez9P4cl',
+      // 'sp5FLIx',
+      // 'EB0qylu',
+      // 'AFcYgHU',
+    ];
+
+    // Shows a specified gif, or a random one if none specified.
+    function showGif(id) {
+      // Get a random gif if the ID doesn't exist.
+      if (!id || gifs.join().indexOf(id) == -1) {
+        id = gifs[Math.floor(Math.random() * gifs.length)];
+      }
+
+      $.body.style.backgroundImage = 'url("http://i.imgur.com/' + id + '.gif")';
+      $link.value = 'http://whatthehelliswrongwiththeworld.com/#' + id;
+    }
+
     // Toggles the share link.
     function toggleLink() {
       if (!$link.style.display) {
@@ -113,38 +151,6 @@
       $link.setSelectionRange(0, $link.value.length);
     }
 
-    // A lot of frustration in this array.
-    var gifs = [
-      'uMFuxvj',
-      'yql6OqH',
-      // 'iTUZotO',
-      'JGFh3o8',
-      'OXOYRjA',
-      'ISNHV55',
-      // '7e8mGbz',
-      'OqhmgJh',
-      // 'ez9P4cl',
-      'bLTZDxV',
-      'pjDkkc1',
-      '9Zjcx7G',
-      // 'sp5FLIx',
-      'aGfRwMz',
-      'IzDxzYl',
-      // 'EB0qylu',
-      'xmH91zq',
-      'xBVm2yH',
-      // 'AFcYgHU',
-      'EgIJo37',
-      'TCGwJry',
-      'redY5iq',
-      'F4cuMOl',
-    ];
-
-    // Either get the gif ID from the hash or pick a random one.
-    var id = location.hash.slice(1) || gifs[Math.floor(Math.random() * gifs.length)];
-
-    $.body.style.backgroundImage = 'url("//i.imgur.com/' + id + '.gif")';
-    $link.value = 'http://whatthehelliswrongwiththeworld.com/#' + id;
 
     $share.addEventListener('click', function() {
       if ($share.className !== 'active') toggleLink();
@@ -158,6 +164,9 @@
       // Reloads the page, removing any hash in the URL.
       location.replace('');
     });
+    // Show the gif specified in the hash, if any.
+    // Fallback to a frustrated man with funny hair.
+    showGif(location.hash.slice(1) || 'xmH91zq');
   </script>
 
   <!-- Look ma, no trackers! -->

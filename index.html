@@ -151,6 +151,7 @@
       $link.setSelectionRange(0, $link.value.length);
     }
 
+    $reload.addEventListener('click', showGif);
 
     $share.addEventListener('click', function() {
       if ($share.className !== 'active') toggleLink();
@@ -160,10 +161,6 @@
     $link.addEventListener('focus', selectLink);
     $link.addEventListener('blur', setTimeout.bind(this, toggleLink, 50));
 
-    $reload.addEventListener('click', function() {
-      // Reloads the page, removing any hash in the URL.
-      location.replace('');
-    });
     // Show the gif specified in the hash, if any.
     // Fallback to a frustrated man with funny hair.
     showGif(location.hash.slice(1) || 'xmH91zq');
